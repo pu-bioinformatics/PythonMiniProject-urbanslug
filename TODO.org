@@ -1,0 +1,33 @@
+* Question 1 - Open a PDB file
+** DONE Read a file
+** TODO Check whether file follows PDB format
+Requirements
+Each line is 80 columns wide
+First 6 chars of each line must have a record name:
+ - HEADER
+ - TITLE
+ - DBREF
+ - SEQRES
+ - HELIX
+ - SHEET
+** DONE Reprint the menu
+** TODO Make menu case insensitive
+* Question 2 -  Information
+** Summary of info
+Include:
+ - filename
+ - title
+** When displaying seq max 50 chars
+** 
+* Question 3 - Histogram of aa
+** display a histogram based on the number of times an amino acid is in the sequence
+** The user can order the historgram
+* Question 4 - Sec structure
+** print a representation of the secondary structure using:
+*** ‘/’ helix
+*** ‘|’  sheet
+*** ‘-’ for any other
+* Question 5 - Exit
+** On quit
+*** Confirm exit
+*** if user wants to save any changes
