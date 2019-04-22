@@ -4,7 +4,7 @@ Mini-project for the Python for Biologist class at Pwani University
 
 ## Usage
 
-### Executable
+### Running it
 ```
 $ python -m amino
 ```
@@ -12,7 +12,6 @@ $ python -m amino
 ### Test
 ```
 $ python setup.py test
-
 ```
 
 ## Credits
