@@ -1,5 +1,7 @@
-def func(x):
-    return x + 1
+import amino.amino.menu as menu
 
-def test_answer():
-    assert func(3) == 4
+
+
+class TestOptions:
+    def case_sensitivity(self):
+        pass

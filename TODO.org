@@ -10,17 +10,20 @@ First 6 chars of each line must have a record name:
  - SEQRES
  - HELIX
  - SHEET
-** DONE Reprint the menu
-** TODO Make menu case insensitive
+** DONE Reprint the menu if file is successfully loaded
+** DONE Ask for a file when the user chooses O
+** TODO Print message asking for confirmation to replace file
+** DONE Make menu case insensitive
+** TODO figure out why opt doesn't update
 * Question 2 -  Information
-** Summary of info
-Include:
- - filename
- - title
-** When displaying seq max 50 chars
-** 
+** DONE Summary of info [2/2]
+*** DONE Filename
+*** DONE Title
+** TODO When displaying seq max 50 chars/aa
+** TODO Display chains as part of summary
+** TODO what if no header strings?
 * Question 3 - Histogram of aa
-** display a histogram based on the number of times an amino acid is in the sequence
+** Display a histogram based on the number of times an amino acid is in the sequence
 ** The user can order the historgram
 * Question 4 - Sec structure
 ** print a representation of the secondary structure using:
@@ -31,3 +34,5 @@ Include:
 ** On quit
 *** Confirm exit
 *** if user wants to save any changes
+* General
+** TODO Use pytest [[https://docs.pytest.org/en/latest/tmpdir.html#the-tmp-path-fixture][tmp_path]]

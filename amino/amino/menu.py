@@ -1,21 +1,34 @@
+import amino.amino.pdb as pdb
+import amino.amino.parser as parser
+
+
+
 loaded = "None"
+contents = None
 
 def option_handler(option):
-    if option == "O":
-        pdb_handler()
-    elif option == "I":
-        pass
-    elif option == "H":
-        pass
-    elif option == "S":
-        pass
-    elif option == "X":
-        pass
-    elif option == "Q":
-        pass
-    else:
-        print ("Not a valid option.\n\n")
-        menu()
+    global contents, loaded
+    opt = str.lower(option)
+
+    # TODO: figure out why opt doesn't update
+    while opt != 'q':
+        if opt == "o":
+            loaded = input("Enter a valid path for a PDB File: ")
+            contents = pdb.pdb_handler(loaded)
+        elif opt == "i":
+            parser.parse_pdb(contents)
+        elif opt == "h":
+            pass
+        elif opt == "s":
+            pass
+        elif opt == "x":
+            pass
+        else:
+            print ("%s is not a valid option.\n\n" % option)
+        start()
+
+    if opt == "q":
+        print("PDB analyzer exiting")
 
 def reloader():
     global loaded
@@ -42,15 +55,18 @@ def overall_menu():
 * 3) Show histogram of amino acids    (H)                                      *
 * 4) Display Secondary Structure      (S)                                      *
 * 5) Export PDB File                  (X)                                      *
-* 6)Exit                              (Q)                                      *
+* 6) Exit                             (Q)                                      *
 *                                                                              *
-*                                                     Current PDB: %s *
+*                                                   Current PDB: %s *
 ********************************************************************************
-    """ % loaded
-    )
+    """ % loaded)
     option = input(": ")
     return option
 
 def file_loader():
-    path = input("Enter a Valid PATH for a PDB File: ")
+    path = input("Enter a valid path for a PDB file: ")
     return path
+
+def start():
+    opt = overall_menu()
+    option_handler(opt)
