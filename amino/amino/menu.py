@@ -6,6 +6,15 @@ import amino.amino.parser as parser
 loaded = "None"
 contents = None
 
+def exit_menu():
+    h = input("Really exit [y|N]: ")
+    if str.lower(h) == 'y':
+        s = input("Save before exiting [Y|n]: ")
+        print("PDB analyzer exiting")
+    else:
+        start()
+
+
 def option_handler(option):
     global contents, loaded
     opt = str.lower(option)
@@ -28,7 +37,7 @@ def option_handler(option):
         start()
 
     if opt == "q":
-        print("PDB analyzer exiting")
+       exit_menu()
 
 def reloader():
     global loaded

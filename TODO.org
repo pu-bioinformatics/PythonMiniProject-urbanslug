@@ -23,16 +23,16 @@ First 6 chars of each line must have a record name:
 ** TODO Display chains as part of summary
 ** TODO what if no header strings?
 * Question 3 - Histogram of aa
-** Display a histogram based on the number of times an amino acid is in the sequence
-** The user can order the historgram
+** TODO Display a histogram based on the number of times an amino acid is in the sequence
+** TODO The user can order the histogram
 * Question 4 - Sec structure
-** print a representation of the secondary structure using:
-*** ‘/’ helix
-*** ‘|’  sheet
-*** ‘-’ for any other
+** TODO print a representation of the secondary structure using:
+*** TODO ‘/’ helix
+*** TODO ‘|’  sheet
+*** TODO ‘-’ for any other
 * Question 5 - Exit
 ** On quit
-*** Confirm exit
-*** if user wants to save any changes
+*** DONE Confirm exit
+*** DONE if user wants to save any changes
 * General
 ** TODO Use pytest [[https://docs.pytest.org/en/latest/tmpdir.html#the-tmp-path-fixture][tmp_path]]
