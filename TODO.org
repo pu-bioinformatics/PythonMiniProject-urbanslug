@@ -20,7 +20,12 @@ First 6 chars of each line must have a record name:
 *** DONE Filename
 *** DONE Title
 ** TODO When displaying seq max 50 chars/aa
-** TODO Display chains as part of summary
+** TODO Display chains as part of summary [3/5]
+*** DONE Identify the chains in the file
+*** DONE split them into separate clusters
+*** DONE Isolate the AA in them
+*** TODO Count the number of AA in them
+*** TODO Extract the sequence in them
 ** TODO what if no header strings?
 * Question 3 - Histogram of aa
 ** TODO Display a histogram based on the number of times an amino acid is in the sequence
