@@ -1,6 +1,11 @@
 import re, operator, itertools
 
 
+IUPAC_AA_codes = {'CYS': 'C', 'ASP': 'D', 'SER': 'S', 'GLN': 'Q', 'LYS': 'K',
+                  'ILE': 'I', 'PRO': 'P', 'THR': 'T', 'PHE': 'F', 'ASN': 'N',
+                  'GLY': 'G', 'HIS': 'H', 'LEU': 'L', 'ARG': 'R', 'TRP': 'W',
+                  'ALA': 'A', 'VAL':'V', 'GLU': 'E', 'TYR': 'Y', 'MET': 'M'}
+
 def isolate_with_header(regex_string, contents):
     title_string_regex = re.compile(regex_string)
     title_strings = filter(lambda c: re.search(title_string_regex, c),
@@ -43,26 +48,95 @@ def split_chains(contents):
 
     return chains
 
+def extract_all_aa(contents):
+    """
+    Get all amino acids in the file
+    """
+    aa_chains = split_chains(contents)
+    y = list(itertools.chain(*aa_chains))
+    return generate_full_chain(y)
+
+def count_each_aa(aa_seq):
+    amino_acids = IUPAC_AA_codes.keys()
+    return dict((aa, aa_seq.count(aa)) for aa in amino_acids)
 
 def extract_amino_acids(chain):
     aa_isolation_regex = re.compile(r'^\w+\s+\d+\s+(.*)')
     return re.search(aa_isolation_regex, chain).group(1).strip()
 
+def generate_full_chain(chain):
+    """
+    Takes a chain as a list of strings. Returns a single string
+    """
+    list_of_subchains = [extract_amino_acids(subchain) for subchain in chain]
+    # Join list into single string separated by spaces
+    return ' '.join(list_of_subchains)
+
 
 def count_amino_acids(chain):
     """
     Generate an aa sequence from a chain
-    Expects to receive a single chain as a list
-    """
-    pass
 
+    Expects to receive a single chain as a list
+    A chain is a list of strings
+    """
+    full_chain = generate_full_chain(chain)
+    # Count the spaces and add 1 to get number of amino acids
+    return full_chain.count(' ') + 1
 
 def generate_aa_sequence(chain):
     """
-    Generate an aa sequence from a chain
-    Expects to receive a single chain as a list
+    Generate an aa sequence from a sequence of three letter amino acid codes
+    Expects to receive a single string of three letter codes
     """
-    pass
+
+
+    chain_list = chain.split(' ')
+    # TODO: What if aa is not in the lookup
+    seq = [IUPAC_AA_codes[aa] for aa in chain_list]
+    return ''.join(seq)
+
+# TODO: merge helices and chain
+def sheets_per_chain(contents):
+    """
+    """
+    sheets = list(isolate_with_header('^SHEET', contents))
+    r = re.compile(r'[A-Z]\W[A-Z]')
+
+    raw_chains = isolate_with_header('^SEQRES', contents)
+    #set of chains
+    mixed_chains = extract_mixed_chains(raw_chains)
+    c = chains(mixed_chains)
+
+    
+
+    # string of ...
+    j = [re.search(r,sheet)[0][2] for sheet in sheets]
+    k = ''.join(j)
+    
+
+    return dict((chain, k.count(chain)) for chain in c)
+
+
+def helices_per_chain(contents):
+    """
+    """
+    sheets = list(isolate_with_header('^HELIX', contents))
+    r = re.compile(r'[A-Z]\W[A-Z]')
+
+    raw_chains = isolate_with_header('^SEQRES', contents)
+    #set of chains
+    mixed_chains = extract_mixed_chains(raw_chains)
+    c = chains(mixed_chains)
+
+    
+
+    # string of ...
+    j = [re.search(r,sheet)[0][2] for sheet in sheets]
+    k = ''.join(j)
+    
+
+    return dict((chain, k.count(chain)) for chain in c)
 
 
 def extract_title(contents):

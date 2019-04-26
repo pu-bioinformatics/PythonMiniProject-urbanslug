@@ -20,15 +20,28 @@ First 6 chars of each line must have a record name:
 *** DONE Filename
 *** DONE Title
 ** TODO When displaying seq max 50 chars/aa
-** TODO Display chains as part of summary [3/5]
+** TODO Display chains as part of summary [5/6]
 *** DONE Identify the chains in the file
 *** DONE split them into separate clusters
 *** DONE Isolate the AA in them
-*** TODO Count the number of AA in them
-*** TODO Extract the sequence in them
+*** DONE Count the number of AA in them
+*** DONE Extract the sequence in them
+*** TODO Display this information
 ** TODO what if no header strings?
+** TODO Calculate number of sheets [3/3]
+*** DONE Extract sections of the file with SHEET
+*** DONE Get the set of AA chains
+*** DONE count the number of sheets for each chain
+** TODO Calculate number of helix [3/3]
+*** DONE Extract sections of the file with HELIX
+*** DONE Get the set of AA chains
+*** DONE count the number of helices for each chain
 * Question 3 - Histogram of aa
-** TODO Display a histogram based on the number of times an amino acid is in the sequence
+** TODO Display a histogram based on the number of times an amino acid is in the sequence [1/2]
+*** DONE Get all amino acids in the sequence
+*** TODO Count aa them based on 3 letter code in a dict
+** TODO Order histogram ascending
+** TODO Order histogram descending
 ** TODO The user can order the histogram
 * Question 4 - Sec structure
 ** TODO print a representation of the secondary structure using:
@@ -36,8 +49,9 @@ First 6 chars of each line must have a record name:
 *** TODO ‘|’  sheet
 *** TODO ‘-’ for any other
 * Question 5 - Exit
-** On quit
+** TODO On quit [2/2]
 *** DONE Confirm exit
 *** DONE if user wants to save any changes
 * General
 ** TODO Use pytest [[https://docs.pytest.org/en/latest/tmpdir.html#the-tmp-path-fixture][tmp_path]]
+** TODO Cleanup parser
