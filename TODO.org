@@ -44,6 +44,12 @@ First 6 chars of each line must have a record name:
 ** TODO Order histogram descending
 ** TODO The user can order the histogram
 * Question 4 - Sec structure
+** TODO Create a dict for aa to secondary structure
+#+BEGIN_SRC python
+  {helix: '/',
+   sheet: '|',
+   other: '-'}
+#+END_SRC
 ** TODO print a representation of the secondary structure using:
 *** TODO ‘/’ helix
 *** TODO ‘|’  sheet
@@ -54,4 +60,5 @@ First 6 chars of each line must have a record name:
 *** DONE if user wants to save any changes
 * General
 ** TODO Use pytest [[https://docs.pytest.org/en/latest/tmpdir.html#the-tmp-path-fixture][tmp_path]]
-** TODO Cleanup parser
+** DONE Cleanup parser [0/0]
+** DONE fix broken loop menu 

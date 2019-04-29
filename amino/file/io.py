@@ -1,7 +1,6 @@
 from os.path import isfile
 
 
-
 def loader(path):
     """
     Takes a file path: checks that the file exists and reads it.
@@ -14,10 +13,9 @@ def loader(path):
         loaded = path
 
         pdb_file = open(path, 'r')
-        contents = pdb_file.read()
+        contents = pdb_file.readlines()
         pdb_file.close()
 
         return contents
     else:
         raise FileNotFoundError(path + " is not a valid file.")
-

@@ -12,7 +12,7 @@ class TestPdbLoading:
 
         file_path = "./data/tests/my_file.pdb"
         non_existent_file_path = "./data/tests/no_file.pdb"
-        contents = "We are"
+        contents = ["We are"]
 
         my_file = open(file_path, 'w')
         my_file.writelines(contents)

@@ -1,59 +1,72 @@
 import amino.amino.pdb as pdb
-import amino.amino.parser as parser
+import amino.amino.output as output
 
+global contents, loaded, keep_running
 
-
+keep_running = True
 loaded = "None"
 contents = None
 
+
 def exit_menu():
+    """
+    """
+    global keep_running
     h = input("Really exit [y|N]: ")
     if str.lower(h) == 'y':
         s = input("Save before exiting [Y|n]: ")
         print("PDB analyzer exiting")
+        keep_running = False
     else:
         start()
 
 
+def load_file_menu():
+    """
+    """
+    global contents
+    loaded = input("Enter a valid path for a PDB File: ")
+    contents = pdb.pdb_handler(loaded)
+
+
 def option_handler(option):
-    global contents, loaded
+    """
+    """
+    global contents
     opt = str.lower(option)
 
     # TODO: figure out why opt doesn't update
-    while opt != 'q':
-        if opt == "o":
-            loaded = input("Enter a valid path for a PDB File: ")
-            contents = pdb.pdb_handler(loaded)
-        elif opt == "i":
-            parser.parse_pdb(contents)
-        elif opt == "h":
-            pass
-        elif opt == "s":
-            pass
-        elif opt == "x":
-            pass
-        else:
-            print ("%s is not a valid option.\n\n" % option)
-        start()
+    if opt == "o":
+        load_file_menu()
+    elif opt == "i":
+        output.summary(contents)
+    elif opt == "h":
+        pass
+    elif opt == "s":
+        pass
+    elif opt == "x":
+        pass
+    elif opt == "q":
+        exit_menu()
+    else:
+        print("%s is not a valid option.\n\n" % option)
 
-    if opt == "q":
-       exit_menu()
 
 def reloader():
-    global loaded
+    """
+    """
     if not loaded:
-        p = input("Are you sure you want to replace the loaded file (y|N): " )
+        p = input("Are you sure you want to replace the loaded file (y|N): ")
         if p:
             pass
         else:
             pass
 
 
-def overall_menu():
-    global loaded
-
-    print(
-        """
+def print_overall_menu():
+    """
+    """
+    print("""
 ********************************************************************************
 * PDB FILE ANALYZER                                                            *
 ********************************************************************************
@@ -72,10 +85,12 @@ def overall_menu():
     option = input(": ")
     return option
 
-def file_loader():
-    path = input("Enter a valid path for a PDB file: ")
-    return path
 
 def start():
-    opt = overall_menu()
+    """
+    """
+    opt = print_overall_menu()
     option_handler(opt)
+
+    if keep_running:
+        start()
