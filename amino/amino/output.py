@@ -1,4 +1,5 @@
 import amino.amino.parser as parser
+import collections
 
 
 def gen_title_str(title):
@@ -79,9 +80,26 @@ def histogram(contents, ordering):
     aa_seq = parser.extract_all_aa(contents)
     aa_count = parser.count_each_aa(aa_seq)
 
-    print(aa_count)
+    # {'CYS': 0, 'ASP': 20, 'SER': 8, 'GLN': 5, 'LYS': 7, 'ILE': 10, 'PRO': 11, 'THR': 8, 'PHE': 12, 'ASN': 5, 'GLY': 20, 'HIS': 7, 'LEU': 13, 'ARG': 7, 'TRP': 4, 'ALA': 15, 'VAL': 6, 'GLU': 6, 'TYR': 9, 'MET': 4}
 
-    print(ordering)
+    if ordering == 'an':  # no of aa ascending
+        l = collections.OrderedDict(
+            sorted(aa_count.items(), key=lambda t: t[1]))
+
+    elif ordering == 'dn':  # no of aa descending
+        l = collections.OrderedDict(
+            sorted(aa_count.items(), key=lambda t: t[1], reverse=True))
+
+    elif ordering == 'aa':  # alphabetically ascending
+        l = collections.OrderedDict(
+            sorted(aa_count.items(), key=lambda t: t[0]))
+    elif ordering == 'da':  # alphabetically descending
+        l = collections.OrderedDict(
+            sorted(aa_count.items(), key=lambda t: t[0], reverse=True))
+
+    for f in l:
+        print("%s (%2d): " % (f, l[f]), end='')
+        print('*' * l[f])
 
 
 def sec_structure():
