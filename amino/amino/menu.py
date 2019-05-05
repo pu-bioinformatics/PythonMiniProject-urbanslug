@@ -24,7 +24,7 @@ def exit_menu():
 def load_file_menu():
     """
     """
-    global contents
+    global contents, loaded
     loaded = input("Enter a valid path for a PDB File: ")
     contents = pdb.pdb_handler(loaded)
 
