@@ -141,14 +141,15 @@ def generate_full_chain(chain):
 
 
 # TODO: update
-def count_amino_acids(chain):
+def count_amino_acids(all_aa_chains):
     """
     Count the number of aa *per chain*
     Take a dict from entire aa sequence and return a dictionary of {chain: int}
     """
-    full_chain = generate_full_chain(chain)
+
     # Count the spaces and add 1 to get number of amino acids
-    return full_chain.count(' ') + 1
+    return dict(
+        (chain, all_aa_chains[chain].count(' ')) for chain in all_aa_chains)
 
 
 def generate_aa_sequence(chain):
@@ -157,10 +158,18 @@ def generate_aa_sequence(chain):
     Expects to receive a single string of three letter codes
     """
 
+    chain.strip()
     chain_list = chain.split(' ')
     # TODO: What if aa is not in the lookup
     seq = [IUPAC_AA_codes[aa] for aa in chain_list]
     return ''.join(seq)
+
+
+def generate_aa_sequence_for_disp(aa_seq):
+    """
+    Take aa seq from generate_aa_sequence and insert a newline every 50 chars.
+    """
+    return re.sub("(.{50})", "\\1\n", aa_seq, 0, re.DOTALL)
 
 
 # TODO: merge helices and chain
