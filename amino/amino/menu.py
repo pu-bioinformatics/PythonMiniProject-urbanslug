@@ -29,6 +29,18 @@ def load_file_menu():
     contents = pdb.pdb_handler(loaded)
 
 
+def hist_menu():
+    print("""
+     Choose an option to order by:
+        number of amino acids - ascending (an)
+        number of amino acids - descending (dn)
+        alphabetically - ascending (aa)
+        alphabetically - descending (da)
+    """)
+    ordering = input("order by: ")
+    return ordering
+
+
 def option_handler(option):
     """
     """
@@ -41,7 +53,8 @@ def option_handler(option):
     elif opt == "i":
         output.summary(contents)
     elif opt == "h":
-        pass
+        ordering = hist_menu()
+        output.histogram(contents, ordering)
     elif opt == "s":
         pass
     elif opt == "x":

@@ -37,9 +37,9 @@ First 6 chars of each line must have a record name:
 *** DONE Get the set of AA chains
 *** DONE count the number of helices for each chain
 * Question 3 - Histogram of aa
-** TODO Display a histogram based on the number of times an amino acid is in the sequence [1/2]
+** TODO Display a histogram based on the number of times an amino acid is in the sequence [2/2]
 *** DONE Get all amino acids in the sequence
-*** TODO Count aa them based on 3 letter code in a dict
+*** DONE Count aa them based on 3 letter code in a dict
 ** TODO Order histogram ascending
 ** TODO Order histogram descending
 ** TODO The user can order the histogram

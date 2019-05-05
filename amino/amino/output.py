@@ -75,8 +75,13 @@ def summary(contents):
     print('\n\n')
 
 
-def histogram():
-    pass
+def histogram(contents, ordering):
+    aa_seq = parser.extract_all_aa(contents)
+    aa_count = parser.count_each_aa(aa_seq)
+
+    print(aa_count)
+
+    print(ordering)
 
 
 def sec_structure():
