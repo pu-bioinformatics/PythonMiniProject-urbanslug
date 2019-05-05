@@ -77,6 +77,9 @@ def summary(contents):
 
 
 def histogram(contents, ordering):
+    """
+    Display histogram
+    """
     aa_seq = parser.extract_all_aa(contents)
     aa_count = parser.count_each_aa(aa_seq)
 
@@ -102,5 +105,30 @@ def histogram(contents, ordering):
         print('*' * l[f])
 
 
-def sec_structure():
-    pass
+def print_chain(unique_chain, seq):
+    print("""
+Chain %s:
+(1)
+    """ % unique_chain)
+    print(seq)
+
+
+def sec_structure(contents, filepath):
+    """
+    """
+    header_string = parser.isolate_with_header('^HEADER', contents)
+    filename = parser.extract_filename(header_string)
+
+    seq_res = parser.isolate_with_header('^SEQRES', contents)
+
+    print("Secondary Structure of the PDB id %s:" % filename)
+
+    chains = parser.extract_all_chains(seq_res)
+    chains_uniq = list(chains.keys())
+    chains_uniq.sort()
+
+    for unique_chain in chains_uniq:
+        seq = parser.generate_aa_sequence(chains[unique_chain].strip())
+        disp_seq = parser.generate_aa_sequence_for_disp(seq)
+
+        print_chain(unique_chain, disp_seq)

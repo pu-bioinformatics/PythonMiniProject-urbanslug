@@ -172,6 +172,12 @@ def generate_aa_sequence_for_disp(aa_seq):
     return re.sub("(.{50})", "\\1\n", aa_seq, 0, re.DOTALL)
 
 
+def sec_str(aa_seq):
+    """
+    """
+    return re.sub("(.{80})", "\\1\n", aa_seq, 0, re.DOTALL)
+
+
 # TODO: merge helices and chain
 def sheets_per_chain(contents):
     """

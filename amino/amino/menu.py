@@ -56,7 +56,7 @@ def option_handler(option):
         ordering = hist_menu()
         output.histogram(contents, ordering)
     elif opt == "s":
-        pass
+        output.sec_structure(contents, loaded)
     elif opt == "x":
         pass
     elif opt == "q":
