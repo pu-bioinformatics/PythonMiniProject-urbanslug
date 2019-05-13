@@ -13,6 +13,11 @@ $ python -m amino
 ```
 $ python setup.py test
 ```
+or 
+
+```
+$ptw
+```
 
 ## Credits
 This Project was designed by [Gustavo Salazar]()

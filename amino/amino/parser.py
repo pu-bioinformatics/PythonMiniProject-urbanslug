@@ -172,6 +172,13 @@ def generate_aa_sequence_for_disp(aa_seq):
     return re.sub("(.{50})", "\\1\n", aa_seq, 0, re.DOTALL)
 
 
+def disp_sec_str(aa_seq):
+    """
+    Take aa seq from generate_aa_sequence and insert a newline every 50 chars.
+    """
+    return re.sub("(.{80})", "\\1\n", aa_seq, 0, re.DOTALL)
+
+
 def sec_str(aa_seq):
     """
     """
@@ -214,6 +221,56 @@ def helices_per_chain(contents):
     k = ''.join(j)
 
     return dict((chain, k.count(chain)) for chain in c)
+
+
+def sec_structure(contents):
+    """
+    """
+
+    helices = list(isolate_with_header('^HELIX', contents))
+    sheets = list(isolate_with_header('^SHEET', contents))
+    seq_res = isolate_with_header('^SEQRES', contents)
+
+    r = re.compile(r'[A-Z]{3}\W[A-Z]')
+
+    j_sheets = [re.findall(r, sheet) for sheet in sheets]
+    j_helices = [re.findall(r, sheet) for sheet in helices]
+
+    sheets_tuple = [(i[-1], i[0:3]) for i in sum(j_sheets, [])]
+    helices_tuple = [(i[-1], i[0:3]) for i in sum(j_helices, [])]
+
+    chains = extract_all_chains(seq_res)
+
+    # Those which are in the A chain and are beta sheets
+    # Those which are in the B chain and are beta sheets
+    a_sheets = [sheet for sheet in sheets_tuple if sheet[0] == 'A']
+    b_sheets = [sheet for sheet in sheets_tuple if sheet[0] == 'B']
+
+    a_helices = [sheet for sheet in helices_tuple if sheet[0] == 'A']
+    b_helices = [sheet for sheet in helices_tuple if sheet[0] == 'B']
+
+    b = chains['B'].strip()
+    a = chains['A'].strip()
+
+    # for
+
+    for o in b_sheets:
+        b = b.replace(o[1], '|')
+
+    for o in a_sheets:
+        a = a.replace(o[1], '|')
+
+    for o in b_helices:
+        b = b.replace(o[1], '/')
+
+    for o in a_helices:
+        a = a.replace(o[1], '/')
+
+    # Replace remaining aa with dashes and remove spaces
+    b = re.sub(r'\w{3}', '-', b).replace(' ', '')
+    a = re.sub(r'\w{3}', '-', a).replace(' ', '')
+
+    return {'A': a, 'B': b}
 
 
 def extract_title(title_strings_gen):

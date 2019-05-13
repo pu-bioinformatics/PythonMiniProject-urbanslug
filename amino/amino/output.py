@@ -105,12 +105,29 @@ def histogram(contents, ordering):
         print('*' * l[f])
 
 
-def print_chain(unique_chain, seq):
+def print_chain(a, b, c):
+
+    bb = parser.disp_sec_str(b)
+    cc = parser.disp_sec_str(c)
+
+    lines = bb.count('\n') + 1
+
     print("""
 Chain %s:
 (1)
-    """ % unique_chain)
-    print(seq)
+    """ % a)
+
+    # interleave them
+    bb = bb.split('\n')
+    cc = cc.split('\n')
+
+    q = list(zip(bb, cc))
+
+    for s in range(0, lines):
+        for k in q[s]:
+            print(k)
+
+    return
 
 
 def sec_structure(contents, filepath):
@@ -127,8 +144,8 @@ def sec_structure(contents, filepath):
     chains_uniq = list(chains.keys())
     chains_uniq.sort()
 
-    for unique_chain in chains_uniq:
-        seq = parser.generate_aa_sequence(chains[unique_chain].strip())
-        disp_seq = parser.generate_aa_sequence_for_disp(seq)
+    seqs = parser.sec_structure(contents)
 
-        print_chain(unique_chain, disp_seq)
+    for chain in chains_uniq:
+        l = parser.generate_aa_sequence(chains[chain].strip())
+        print_chain(chain, l, seqs[chain])

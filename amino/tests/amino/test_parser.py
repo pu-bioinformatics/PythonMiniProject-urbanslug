@@ -102,25 +102,16 @@ APP-DRIVED DECAPEPTIDE INHIBITOR"
 
     def test_generate_full_chain(self):
         [first_chain, second_chain] = parser.split_chains(TestParser.pdb)
-        first_seq = 'TYR ASN PHE PHE PRO ARG LYS PRO LYS TRP ASP LYS ASN GLN ILE THR TYR \
-ARG ILE ILE GLY TYR THR PRO ASP LEU ASP PRO GLU THR VAL ASP ASP ALA PHE ALA \
-ARG ALA PHE GLN VAL TRP SER ASP VAL THR PRO LEU ARG PHE SER ARG ILE HIS \
-ASP GLY GLU ALA ASP ILE MET ILE ASN PHE GLY ARG TRP GLU HIS GLY ASP GLY \
-TYR PRO PHE ASP GLY LYS ASP GLY LEU LEU ALA HIS ALA PHE ALA PRO GLY THR \
-GLY VAL GLY GLY ASP SER HIS PHE ASP ASP ASP GLU LEU TRP THR LEU GLY LYS \
-GLY VAL GLY TYR SER LEU PHE LEU VAL ALA ALA HIS ALA PHE GLY HIS ALA MET \
-GLY LEU GLU HIS SER GLN ASP PRO GLY ALA LEU MET ALA PRO ILE TYR THR \
-TYR THR LYS ASN PHE ARG LEU SER GLN ASP ASP ILE LYS GLY ILE GLN GLU LEU TYR GLY ALA SER PRO ASP'
 
-        second_seq = 'ILE SER TYR GLY ASN ASP ALA LEU MET PRO'
-
-        assert parser.generate_full_chain(first_chain) == first_seq
-        assert parser.generate_full_chain(second_chain) == second_seq
+        assert parser.generate_full_chain(first_chain) == TestParser.first_seq
+        assert parser.generate_full_chain(
+            second_chain) == TestParser.second_seq
 
     def test_count_amino_acids(self):
-        [first_chain, second_chain] = parser.split_chains(TestParser.pdb)
-        assert parser.count_amino_acids(first_chain) == 167
-        assert parser.count_amino_acids(second_chain) == 10
+        seq_res = parser.isolate_with_header('^SEQRES', TestParser.pdb)
+        chains = parser.extract_all_chains(seq_res)
+
+        assert parser.count_amino_acids(chains) == {'B': 10, 'A': 167}
 
     def test_generate_aa_sequence(self):
         p = 'YNFFPRKPKWDKNQITYRIIGYTPDLDPETVDDAFARAFQVWSDVTPLRF\
