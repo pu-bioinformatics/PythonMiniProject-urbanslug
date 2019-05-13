@@ -14,20 +14,20 @@ First 6 chars of each line must have a record name:
 ** DONE Ask for a file when the user chooses O
 ** TODO Print message asking for confirmation to replace file
 ** DONE Make menu case insensitive
-** TODO figure out why opt doesn't update
+** DONE figure out why opt doesn't update
 * Question 2 -  Information
 ** DONE Summary of info [2/2]
 *** DONE Filename
 *** DONE Title
 ** DONE When displaying seq max 50 chars/aa
-** TODO Display chains as part of summary [5/6]
+** DONE Display chains as part of summary [6/6]
 *** DONE Identify the chains in the file
 *** DONE split them into separate clusters
 *** DONE Isolate the AA in them
 *** DONE Count the number of AA in them
 *** DONE Extract the sequence in them
-*** TODO Display this information
-** TODO what if no header strings?
+*** DONE Display this information
+** DONE what if no header strings?
 ** DONE Calculate number of sheets [3/3]
 *** DONE Extract sections of the file with SHEET
 *** DONE Get the set of AA chains
@@ -43,17 +43,17 @@ First 6 chars of each line must have a record name:
 ** DONE Order histogram ascending
 ** DONE Order histogram descending
 ** DONE The user can order the histogram
-* Question 4 - Sec structure
-** TODO Create a dict for aa to secondary structure
+* TODO Question 4 - Sec structure
+** DONE Create a dict for aa to secondary structure
 #+BEGIN_SRC python
   {helix: '/',
    sheet: '|',
    other: '-'}
 #+END_SRC
-** TODO print a representation of the secondary structure using:
-*** TODO ‘/’ helix
-*** TODO ‘|’  sheet
-*** TODO ‘-’ for any other
+** DONE print a representation of the secondary structure using:
+*** DONE ‘/’ helix
+*** DONE ‘|’  sheet
+*** DONE ‘-’ for any other
 * Question 5 - Exit
 ** TODO On quit [2/2]
 *** DONE Confirm exit
