@@ -1,5 +1,4 @@
 * Question 1 - Open a PDB file
-** DONE Read a file
 ** TODO Check whether file follows PDB format
 Requirements
 Each line is 80 columns wide
@@ -10,55 +9,13 @@ First 6 chars of each line must have a record name:
  - SEQRES
  - HELIX
  - SHEET
-** DONE Reprint the menu if file is successfully loaded
-** DONE Ask for a file when the user chooses O
 ** TODO Print message asking for confirmation to replace file
-** DONE Make menu case insensitive
-** DONE figure out why opt doesn't update
-* Question 2 -  Information
-** DONE Summary of info [2/2]
-*** DONE Filename
-*** DONE Title
-** DONE When displaying seq max 50 chars/aa
-** DONE Display chains as part of summary [6/6]
-*** DONE Identify the chains in the file
-*** DONE split them into separate clusters
-*** DONE Isolate the AA in them
-*** DONE Count the number of AA in them
-*** DONE Extract the sequence in them
-*** DONE Display this information
-** DONE what if no header strings?
-** DONE Calculate number of sheets [3/3]
-*** DONE Extract sections of the file with SHEET
-*** DONE Get the set of AA chains
-*** DONE count the number of sheets for each chain
-** DONE Calculate number of helix [3/3]
-*** DONE Extract sections of the file with HELIX
-*** DONE Get the set of AA chains
-*** DONE count the number of helices for each chain
-* Question 3 - Histogram of aa
-** DONE Display a histogram based on the number of times an amino acid is in the sequence [2/2]
-*** DONE Get all amino acids in the sequence
-*** DONE Count aa them based on 3 letter code in a dict
-** DONE Order histogram ascending
-** DONE Order histogram descending
-** DONE The user can order the histogram
-* TODO Question 4 - Sec structure
-** DONE Create a dict for aa to secondary structure
-#+BEGIN_SRC python
-  {helix: '/',
-   sheet: '|',
-   other: '-'}
-#+END_SRC
-** DONE print a representation of the secondary structure using:
-*** DONE ‘/’ helix
-*** DONE ‘|’  sheet
-*** DONE ‘-’ for any other
+* Question 2 - Information
+* Question 3 - Histogram of amino acids
+* Question 4 - Secondary structure
+** TODO Make it work with unique chains instead of hard coding A and B
+** TODO Figure out why the PDF solution could be different from yours
+** TODO Add tests for secondary structure
 * Question 5 - Exit
-** TODO On quit [2/2]
-*** DONE Confirm exit
-*** DONE if user wants to save any changes
-* General
+* Test
 ** TODO Use pytest [[https://docs.pytest.org/en/latest/tmpdir.html#the-tmp-path-fixture][tmp_path]]
-** DONE Cleanup parser [0/0]
-** DONE fix broken loop menu 
