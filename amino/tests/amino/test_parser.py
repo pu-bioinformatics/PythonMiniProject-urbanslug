@@ -143,3 +143,18 @@ SQDDIKGIQELYGASPD'
         aa_seq = parser.extract_all_aa(TestParser.pdb)
         aa_count = parser.count_each_aa(aa_seq)
         assert aa_count['ALA'] == 15
+
+    def test_find_helix_positions(self):
+        """
+        """
+        helix_positions = parser.find_helix_positions(TestParser.pdb)
+        expected_helix_positions = [('A', 27, 44), ('A', 114, 126),
+                                    ('A', 151, 163)]
+        assert helix_positions == expected_helix_positions
+
+    def test_find_sheet_positions(self):
+        """
+        """
+        sheet_positions = parser.find_sheet_positions(TestParser.pdb)
+        first_sheet_position = ('A', 2, 3)
+        assert sheet_positions[0] == first_sheet_position

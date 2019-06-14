@@ -174,7 +174,7 @@ def generate_aa_sequence_for_disp(aa_seq):
 
 def disp_sec_str(aa_seq):
     """
-    Take aa seq from generate_aa_sequence and insert a newline every 50 chars.
+    Take aa seq from generate_aa_sequence and insert a newline every 80 chars.
     """
     return re.sub("(.{80})", "\\1\n", aa_seq, 0, re.DOTALL)
 
@@ -199,6 +199,7 @@ def sheets_per_chain(contents):
 
     # string of ...
     j = [re.search(r, sheet)[0][2] for sheet in sheets]
+
     k = ''.join(j)
 
     return dict((chain, k.count(chain)) for chain in c)
@@ -223,6 +224,100 @@ def helices_per_chain(contents):
     return dict((chain, k.count(chain)) for chain in c)
 
 
+def find_posititons(f_list):
+    r = re.compile(r'[A-Z]\W+\d*')
+
+    triples = []
+
+    for line in f_list:
+        matches = re.findall(r, line)
+        chain = matches[2].split(" ")[0]
+        start = matches[2].split(" ")[-1]
+        stop = matches[4].split(" ")[-1]
+        triples.append((chain, int(start), int(stop)))
+
+    return triples
+
+
+def find_sheet_positions(contents):
+    sheets = list(isolate_with_header('^SHEET', contents))
+
+    r = re.compile(r'[A-Z]\W+\d*')
+
+    triples = []
+
+    for line in sheets:
+        matches = re.findall(r, line)
+        chain = matches[3].split(" ")[0]
+        start = matches[3].split(" ")[-1]
+        stop = matches[5].split(" ")[-1]
+        triples.append((chain, int(start), int(stop)))
+
+    return triples
+
+
+def find_tags(contents):
+    helices = list(isolate_with_header('^HELIX', contents))
+
+
+def find_helix_positions(contents):
+    helices = list(isolate_with_header('^HELIX', contents))
+    return find_posititons(helices)
+
+
+def chain_as_list(chains):
+    aa_list = {}
+
+    for chain in chains.keys():
+        stripped_chain = chains[chain].strip()
+        aa_list[chain] = stripped_chain.split(" ")
+
+    return aa_list
+
+
+def gen_representation(chains, helix_pos, sheet_pos):
+    """
+    """
+
+    representation = {}
+
+    for chain in chains.keys():
+        representation[chain] = "-" * len(chains[chain])
+
+    for (chain, start, stop) in helix_pos:
+        string = representation[chain]
+
+        representation[chain] = string[:start - 1] + "/" * (stop - start +
+                                                            1) + string[stop:]
+
+    for (chain, start, stop) in sheet_pos:
+        string = representation[chain]
+        representation[chain] = string[:start - 1] + "|" * (stop - start +
+                                                            1) + string[stop:]
+
+    return representation
+
+
+def secondary_structure(contents):
+    """
+    """
+    seq_res = isolate_with_header('^SEQRES', contents)
+
+    chains = extract_all_chains(seq_res)
+    stripped_chains = chain_as_list(chains)
+
+    helix_positions = find_helix_positions(contents)
+    sheet_positions = find_sheet_positions(contents)
+
+    #a = chains['A'].strip()
+    #b = chains['B'].strip()
+
+    #stripped_chains = {'A': a, 'B': b}
+
+    return gen_representation(stripped_chains, helix_positions,
+                              sheet_positions)
+
+
 def sec_structure(contents):
     """
     """
@@ -242,8 +337,8 @@ def sec_structure(contents):
     chains = extract_all_chains(seq_res)
 
     # Those which are in the A chain and are beta sheets
-    # Those which are in the B chain and are beta sheets
     a_sheets = [sheet for sheet in sheets_tuple if sheet[0] == 'A']
+    # Those which are in the B chain and are beta sheets
     b_sheets = [sheet for sheet in sheets_tuple if sheet[0] == 'B']
 
     a_helices = [sheet for sheet in helices_tuple if sheet[0] == 'A']
@@ -251,6 +346,9 @@ def sec_structure(contents):
 
     b = chains['B'].strip()
     a = chains['A'].strip()
+
+    print(b)
+    print(a)
 
     # for
 

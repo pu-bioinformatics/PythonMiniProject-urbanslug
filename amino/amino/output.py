@@ -144,7 +144,7 @@ def sec_structure(contents, filepath):
     chains_uniq = list(chains.keys())
     chains_uniq.sort()
 
-    seqs = parser.sec_structure(contents)
+    seqs = parser.secondary_structure(contents)
 
     for chain in chains_uniq:
         l = parser.generate_aa_sequence(chains[chain].strip())
