@@ -1,6 +1,6 @@
 # PythonMiniProject
 Mini-project for the Python for Biologist class at Pwani University
-
+Requires Python 3
 
 ## Usage
 

@@ -58,7 +58,7 @@ def option_handler(option):
     elif opt == "s":
         output.sec_structure(contents, loaded)
     elif opt == "x":
-        pass
+        output.export(loaded)
     elif opt == "q":
         exit_menu()
     else:

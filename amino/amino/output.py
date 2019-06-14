@@ -149,3 +149,7 @@ def sec_structure(contents, filepath):
     for chain in chains_uniq:
         l = parser.generate_aa_sequence(chains[chain].strip())
         print_chain(chain, l, seqs[chain])
+
+
+def export(filepath):
+    print("Exporting nothing for now...")
